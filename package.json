@@ -1,0 +1,11 @@
+{
+  "name": "proto-game-ecs",
+  "version": "1.0.0",
+  "description": "A lightweight component entity system for use with the proto-game library",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "smith",
+  "license": "MIT"
+}
