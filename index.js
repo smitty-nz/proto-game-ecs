@@ -1,3 +1,7 @@
-const EntityManager = require( './src/entitymanager' );
+const Game = require( 'proto-game' );
 
-module.exports = EntityManager;
+const ECSManager = require( './src/ecs' );
+
+Game.ecs = new ECSManager();
+
+module.exports = Game;

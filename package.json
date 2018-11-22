@@ -4,8 +4,13 @@
   "description": "A lightweight component entity system for use with the proto-game library",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "autobuild": "watchify ./test/test-index.js -o ./test/out/out.js --verbose",
+    "build": "browserify ./test/test-index.js -o ./test/out/out.js"
   },
   "author": "smith",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "proto-game": "^1.1.5"
+  }
 }
