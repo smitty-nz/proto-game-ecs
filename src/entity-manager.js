@@ -1,8 +1,10 @@
-const Entity = require( './entity' );
+const Events    = require( 'events' );
+const Entity    = require( './class/entity' );
 const SubSetMap = require( './sub-set-map' )
 
-class EntityManager {
+class EntityManager extends Events.EventEmitter {
     constructor(){
+        super();
         this.componentSets = new SubSetMap();
     }
     /**
@@ -17,9 +19,11 @@ class EntityManager {
             this.initComponent( entity, component );
         }
 
+        this.componentSets.add( [ '*' ], entity );
+        this.emit( 'new', entity );
+
         return entity;
     }
-
     /**
      * Destroys the given entity
      * also destroys any components it holds
@@ -31,8 +35,10 @@ class EntityManager {
         for( let [ key, component ] of Object.entries( components ) ){
             this.destroyComponent( entity, component );
         }
-    }
 
+        this.componentSets.delete( [ '*' ], entity );
+        this.emit( 'destroy', entity );
+    }
     /**
      * Returns the set of entities that have the supplied
      * component types.
@@ -43,7 +49,6 @@ class EntityManager {
         componentTypes = componentTypes.map( c => { return c.name || c; } )
         return this.componentSets.get( componentTypes );
     }
-
     /**
      * Attaches the given component to the given entity
      * and initialized the component in the ECS manager.
@@ -60,7 +65,6 @@ class EntityManager {
         // add to setmap
         this.componentSets.add( [ name ], entity );
     }
-
     /**
      * Removes the given component from the given entity
      * and from the ECS manager.
