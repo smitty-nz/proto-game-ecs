@@ -1,6 +1,6 @@
 const Events    = require( 'events' );
 const Entity    = require( './class/entity' );
-const SubSetMap = require( './sub-set-map' )
+const SubSetMap = require( './structures/sub-set-map' )
 
 class EntityManager extends Events.EventEmitter {
     constructor(){
