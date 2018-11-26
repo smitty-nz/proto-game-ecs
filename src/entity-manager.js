@@ -32,12 +32,14 @@ class EntityManager extends Events.EventEmitter {
     destroy( entity ){
         let components = entity.components;
 
+        this.emit( 'destroy', entity );
+
         for( let [ key, component ] of Object.entries( components ) ){
             this.destroyComponent( entity, component );
         }
 
         this.componentSets.delete( [ '*' ], entity );
-        this.emit( 'destroy', entity );
+        
     }
     /**
      * Returns the set of entities that have the supplied

@@ -1,4 +1,5 @@
 const Events        = require( 'events' );
+const Registry      = require('./class/registry' );
 const EntityManager = require( './entity-manager' );
 const SystemManager = require( './system-manager' );
 
@@ -72,6 +73,9 @@ class ECSManager extends Events.EventEmitter {
     }
     renderer( renderer ){
         return this.system( renderer );
+    }
+    registry(){
+        return new Registry();
     }
     /**
      * Destroys the given entity

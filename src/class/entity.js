@@ -12,7 +12,9 @@ class Entity {
     }
     get( ...componentTypes ){
         componentTypes = componentTypes.map( c =>{ return c.name || c } );
-        return componentTypes.map( c =>{ return this.components[ c ] } );
+        componentTypes = componentTypes.map( c =>{ return this.components[ c ] } );
+        componentTypes.push( this.id );
+        return componentTypes;
     }
     has( ...componentTypes ){
         componentTypes = componentTypes.map( c =>{ return c.name || c } );
@@ -23,9 +25,6 @@ class Entity {
         }
         return true;
     } 
-   use( method ){
-       method( this.components );
-   }
 }
 
 module.exports = Entity;
